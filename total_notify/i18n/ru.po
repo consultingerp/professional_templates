@@ -1,0 +1,663 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* total_notify
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-09-06 13:47+0000\n"
+"PO-Revision-Date: 2016-09-06 16:48+0300\n"
+"Last-Translator: Aleksandr Filippov <filippov@itlibertas.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. module: total_notify
+#: help:total.rule,from_today_days:0
+msgid ""
+"\n"
+"        * For example, \"Date > 5\" means that an object date should be "
+"after today at least in 5 days.\n"
+"        * So, today is 15.07. Condition would return True, in case a 'Date' "
+"is not earlier than 21.07.\n"
+"        * In the same instance \"Date < 5\" would return True, only in case "
+"a 'Date' is not after 20.07.\n"
+"        * You may use negative numbers. For example, \"Date < -1\" means "
+"that object happened the day before yesterday or earlier.\n"
+"        * \"Date = -1\" returns True, if a Date is exactly yesterday\n"
+msgstr ""
+"\n"
+"        * \"Дата > 5\" означает, что дата объекта должна быть на 5 дней "
+"позже, чем сегодня.\n"
+"        * Например, сегодня - 15.07.  Условие вернет True, в случае, если "
+"'Дата' не ранее, чем 21.07.\n"
+"        * В том же примере \"Дата < 5\" вернет True, только в случае, если "
+"'Дата' не позже 20.07.\n"
+"        * Вы можете использовать отрицательные числа. Например, \"дата < "
+"-1\" означает, что событие случилось позавчера или раньше.\n"
+"        * \"Дата = -1\" вернет True, если дата - точно вчера\n"
+
+#. module: total_notify
+#: model:email.template,body_html:total_notify.total_notify_email_template
+msgid ""
+"\n"
+"<table border=\"1\" style=\"border-collapse: collapse;\" width=\"100%\">\n"
+"<tbody>\n"
+"<tr>\n"
+"<td colspan=\"2\" width=\"80%\" style=\"padding:2%;text-align: center;border-"
+"bottom:0px;\">\n"
+"<strong><big><font><a> ${object.name} </a></font></big></strong>\n"
+"</td>\n"
+"</tr>\n"
+"<tr>\n"
+"<td colspan=\"2\" style=\"border-top:0px;border-bottom:0px;\">\n"
+"<table border=\"1\" style=\"border-color:rgba(150, 150, 220, 0.3);border-"
+"collapse: collapse;\" width=\"100%\">\n"
+"<tbody>\n"
+"<tr>\n"
+"<td>\n"
+"</td>\n"
+"% for column in object.column_ids:\n"
+"<td style=\"padding:2%;\">\n"
+"<strong>${column.field_label}</strong>\n"
+"</td>\n"
+"% endfor\n"
+"</tr>\n"
+"% for instance in ctx['found_instances']:\n"
+"<tr>\n"
+"<td>\n"
+"<a href=\"${ctx['base_url']}/web?db=${ctx['dbname']}#id=${instance.id}"
+"&view_type=form&model=${object.res_model.model}\" style=\"background-color: "
+"#5cb85c;padding: 2px 6px 2px 6px;border-top: 1px solid #4cae4c;border-right: "
+"1px solid #4cae4c;border-bottom: 1px solid #4cae4c;border-left: 1px solid "
+"#4cae4c;text-decoration:none;border-radius: 5px;\"><span style=\"color:"
+"#FFFFFF;\">&gt;</span></a>\n"
+"</td>\n"
+"% for column in object.column_ids:\n"
+"  <td style=\"padding:2%;\">\n"
+"    % if column.field_id.ttype not in ['many2one']\n"
+"       % if instance[column.field_id.name]\n"
+"          ${instance[column.field_id.name]}\n"
+"       % endif\n"
+"    % endif\n"
+"\n"
+"    % if column.field_id.ttype in ['many2one']\n"
+"      <!-- If no related field, insert just name -->\n"
+"      % if not column.related_field\n"
+"        % if instance[column.field_id.name]\n"
+"          ${instance[column.field_id.name].name}\n"
+"        % endif\n"
+"      % endif\n"
+"\n"
+"      <!-- If related field exists, insert it or its name (in case of m2o)--"
+">\n"
+"      % if column.related_field\n"
+"        % if column.related_field.ttype not in ['many2one']\n"
+"           % for line in instance[column.field_id.name].read():\n"
+"              % if line.get(column.related_field.name)\n"
+"                ${line.get(column.related_field.name)}\n"
+"              % endif\n"
+"           % endfor\n"
+"        % endif\n"
+"\n"
+"        % if column.related_field.ttype in ['many2one']\n"
+"           % for line in instance[column.field_id.name].read():\n"
+"              % if line.get(column.related_field.name)\n"
+"                ${line.get(column.related_field.name)[1]}\n"
+"              % endif\n"
+"           % endfor\n"
+"        % endif\n"
+"\n"
+"      % endif\n"
+"\n"
+"    % endif\n"
+"  </td>\n"
+"% endfor\n"
+"</tr>\n"
+"% endfor\n"
+"</tbody>\n"
+"</table>\n"
+"</td>\n"
+"</tr>\n"
+"</tbody>\n"
+"</table>\n"
+"\n"
+"            "
+msgstr ""
+"\n"
+"<table border=\"1\" style=\"border-collapse: collapse;\" width=\"100%\">\n"
+"<tbody>\n"
+"<tr>\n"
+"<td colspan=\"2\" width=\"80%\" style=\"padding:2%;text-align: center;border-"
+"bottom:0px;\">\n"
+"<strong><big><font><a> ${object.name} </a></font></big></strong>\n"
+"</td>\n"
+"</tr>\n"
+"<tr>\n"
+"<td colspan=\"2\" style=\"border-top:0px;border-bottom:0px;\">\n"
+"<table border=\"1\" style=\"border-color:rgba(150, 150, 220, 0.3);border-"
+"collapse: collapse;\" width=\"100%\">\n"
+"<tbody>\n"
+"<tr>\n"
+"<td>\n"
+"</td>\n"
+"% for column in object.column_ids:\n"
+"<td style=\"padding:2%;\">\n"
+"<strong>${column.field_label}</strong>\n"
+"</td>\n"
+"% endfor\n"
+"</tr>\n"
+"% for instance in ctx['found_instances']:\n"
+"<tr>\n"
+"<td>\n"
+"<a href=\"${ctx['base_url']}/web?db=${ctx['dbname']}#id=${instance.id}"
+"&view_type=form&model=${object.res_model.model}\" style=\"background-color: "
+"#5cb85c;padding: 2px 6px 2px 6px;border-top: 1px solid #4cae4c;border-right: "
+"1px solid #4cae4c;border-bottom: 1px solid #4cae4c;border-left: 1px solid "
+"#4cae4c;text-decoration:none;border-radius: 5px;\"><span style=\"color:"
+"#FFFFFF;\">&gt;</span></a>\n"
+"</td>\n"
+"% for column in object.column_ids:\n"
+"  <td style=\"padding:2%;\">\n"
+"    % if column.field_id.ttype not in ['many2one']\n"
+"       % if instance[column.field_id.name]\n"
+"          ${instance[column.field_id.name]}\n"
+"       % endif\n"
+"    % endif\n"
+"\n"
+"    % if column.field_id.ttype in ['many2one']\n"
+"      <!-- If no related field, insert just name -->\n"
+"      % if not column.related_field\n"
+"        % if instance[column.field_id.name]\n"
+"          ${instance[column.field_id.name].name}\n"
+"        % endif\n"
+"      % endif\n"
+"\n"
+"      <!-- If related field exists, insert it or its name (in case of m2o)--"
+">\n"
+"      % if column.related_field\n"
+"        % if column.related_field.ttype not in ['many2one']\n"
+"           % for line in instance[column.field_id.name].read():\n"
+"              % if line.get(column.related_field.name)\n"
+"                ${line.get(column.related_field.name)}\n"
+"              % endif\n"
+"           % endfor\n"
+"        % endif\n"
+"\n"
+"        % if column.related_field.ttype in ['many2one']\n"
+"           % for line in instance[column.field_id.name].read():\n"
+"              % if line.get(column.related_field.name)\n"
+"                ${line.get(column.related_field.name)[1]}\n"
+"              % endif\n"
+"           % endfor\n"
+"        % endif\n"
+"\n"
+"      % endif\n"
+"\n"
+"    % endif\n"
+"  </td>\n"
+"% endfor\n"
+"</tr>\n"
+"% endfor\n"
+"</tbody>\n"
+"</table>\n"
+"</td>\n"
+"</tr>\n"
+"</tbody>\n"
+"</table>\n"
+"\n"
+"            "
+
+#. module: total_notify
+#: selection:total.rule,condition:0
+msgid "<>"
+msgstr "<>"
+
+#. module: total_notify
+#: model:ir.actions.act_window,help:total_notify.total_notify_action
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"\t             Click to configure a notification to send reminders\n"
+"\t          </p>\n"
+"\t        "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"\t             Click to configure a notification to send reminders\n"
+"\t          </p>\n"
+"\t        "
+
+#. module: total_notify
+#: model:ir.actions.act_window,help:total_notify.total_requisite_action
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"\t             Click to create a new object by which a notification may be "
+"sent\n"
+"\t          </p>\n"
+"\t        "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"\t             Click to create a new object by which a notification may be "
+"sent\n"
+"\t          </p>\n"
+"\t        "
+
+#. module: total_notify
+#: field:total.rule,send_result_flag_sel:0
+msgid "Action"
+msgstr "Действие"
+
+#. module: total_notify
+#: view:total.notify:total_notify.total_notify_form
+msgid "Add contacts to notify..."
+msgstr "Выберите контакты или укажите адреса электронной почты "
+
+#. module: total_notify
+#: selection:total.requisite,field_type:0
+msgid "Char"
+msgstr "Строка"
+
+#. module: total_notify
+#: field:fields.line,field_id:0
+msgid "Column"
+msgstr "Поле"
+
+#. module: total_notify
+#: view:total.notify:total_notify.total_notify_form
+#: field:total.notify,column_ids:0
+msgid "Columns to show"
+msgstr "Отображаемые колонки"
+
+#. module: total_notify
+#: field:fields.line,related_field:0
+msgid "Complementary"
+msgstr "Доп"
+
+#. module: total_notify
+#: field:total.notify,partner_ids:0
+msgid "Computed Recipients"
+msgstr "Рассчитанные получатели"
+
+#. module: total_notify
+#: field:total.rule,condition:0
+msgid "Condition"
+msgstr "Условие"
+
+#. module: total_notify
+#. openerp-web
+#: code:addons/total_notify/static/src/js/genial_selection.js:65
+#, python-format
+msgid "Create \"<strong>%s</strong>\""
+msgstr "Создать \"<strong>%s</strong>\""
+
+#. module: total_notify
+#. openerp-web
+#: code:addons/total_notify/static/src/js/genial_selection.js:76
+#, python-format
+msgid "Create and edit ..."
+msgstr "Создать и изменить ..."
+
+#. module: total_notify
+#. openerp-web
+#: code:addons/total_notify/static/src/js/genial_selection.js:374
+#, python-format
+msgid "Create: "
+msgstr "Создать: "
+
+#. module: total_notify
+#: field:fields.line,create_uid:0 field:total.notify,create_uid:0
+#: field:total.requisite,create_uid:0 field:total.rule,create_uid:0
+msgid "Created by"
+msgstr "Создано"
+
+#. module: total_notify
+#: field:fields.line,create_date:0 field:total.notify,create_date:0
+#: field:total.requisite,create_date:0 field:total.rule,create_date:0
+msgid "Created on"
+msgstr "Создано"
+
+#. module: total_notify
+#: code:addons/total_notify/models/total_notify.py:68
+#, python-format
+msgid "Cron job for total notify "
+msgstr "Планируемая работа по оповещению"
+
+#. module: total_notify
+#: selection:total.requisite,field_type:0
+msgid "Date"
+msgstr "Дата"
+
+#. module: total_notify
+#: help:total.notify,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr "Дата последнего сообщения"
+
+#. module: total_notify
+#: selection:total.requisite,field_type:0
+msgid "Datetime"
+msgstr "Дата и время"
+
+#. module: total_notify
+#: field:total.rule,from_today_days:0
+msgid "Days from today"
+msgstr "Дней, начиная от сегодня"
+
+#. module: total_notify
+#: selection:total.rule,send_result_flag_sel:0
+msgid "Do not send"
+msgstr "Не отправлять"
+
+#. module: total_notify
+#: field:total.requisite,field_id:0
+msgid "Field"
+msgstr "Поле"
+
+#. module: total_notify
+#: model:ir.model,name:total_notify.model_fields_line
+msgid "Field Line"
+msgstr "Линия поля"
+
+#. module: total_notify
+#: field:total.requisite,field_type:0
+msgid "Field Type"
+msgstr "Тип Поля"
+
+#. module: total_notify
+#: code:addons/total_notify/models/total_requisite.py:43
+#, python-format
+msgid ""
+"Field must belong to a proper model. Firstly select a model, then a field"
+msgstr ""
+"Поле должно относиться к правильной модели! Сначала выберите модель, а потом "
+"поле!"
+
+#. module: total_notify
+#: selection:total.requisite,field_type:0
+msgid "Float"
+msgstr "Дробное число"
+
+#. module: total_notify
+#: field:total.notify,message_follower_ids:0
+msgid "Followers"
+msgstr "Подписчики"
+
+#. module: total_notify
+#: help:total.notify,message_summary:0
+msgid ""
+"Holds the Chatter summary (number of messages, ...). This summary is "
+"directly in html format in order to be inserted in kanban views."
+msgstr "История общения"
+
+#. module: total_notify
+#: field:fields.line,id:0 field:total.notify,id:0 field:total.requisite,id:0
+#: field:total.rule,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: total_notify
+#: help:total.notify,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr "Если отмечено, сообщения требуют Вашего внимания"
+
+#. module: total_notify
+#: selection:total.requisite,field_type:0
+msgid "Integer"
+msgstr "Целое число"
+
+#. module: total_notify
+#: view:total.notify:total_notify.total_notify_form
+msgid "Interval Number"
+msgstr "Частота повторений"
+
+#. module: total_notify
+#: view:total.notify:total_notify.total_notify_form
+msgid "Interval Unit"
+msgstr "Тип Повторения"
+
+#. module: total_notify
+#: field:total.notify,message_is_follower:0
+msgid "Is a Follower"
+msgstr "Подписчик"
+
+#. module: total_notify
+#: field:fields.line,field_label:0
+msgid "Label"
+msgstr "Лейбл"
+
+#. module: total_notify
+#: field:total.notify,lang:0
+msgid "Language"
+msgstr "Язык"
+
+#. module: total_notify
+#: field:total.notify,message_last_post:0
+msgid "Last Message Date"
+msgstr "Дата последнего сообщения"
+
+#. module: total_notify
+#: field:fields.line,write_uid:0 field:total.notify,write_uid:0
+#: field:total.requisite,write_uid:0 field:total.rule,write_uid:0
+msgid "Last Updated by"
+msgstr "Последнее обновление"
+
+#. module: total_notify
+#: field:fields.line,write_date:0 field:total.notify,write_date:0
+#: field:total.requisite,write_date:0 field:total.rule,write_date:0
+msgid "Last Updated on"
+msgstr "Последнее обновление"
+
+#. module: total_notify
+#: field:total.notify,message_ids:0
+msgid "Messages"
+msgstr "Сообщения"
+
+#. module: total_notify
+#: help:total.notify,message_ids:0
+msgid "Messages and communication history"
+msgstr "Сообщения"
+
+#. module: total_notify
+#: view:total.notify:total_notify.total_notify_form
+msgid "Misc"
+msgstr "Прочее"
+
+#. module: total_notify
+#: field:fields.line,model_from_field_id:0 field:total.notify,res_model:0
+#: field:total.requisite,res_model:0 field:total.rule,model_name:0
+msgid "Model"
+msgstr "Модель"
+
+#. module: total_notify
+#: field:total.notify,name:0 field:total.requisite,name:0
+msgid "Name"
+msgstr "Название"
+
+#. module: total_notify
+#: view:total.notify:total_notify.total_notify_form
+msgid "Next Execution Date"
+msgstr "Дата Следующего Исполнения"
+
+#. module: total_notify
+#. openerp-web
+#: code:addons/total_notify/static/src/js/genial_selection.js:85
+#, python-format
+msgid "No results ..."
+msgstr "Нет результатов ..."
+
+#. module: total_notify
+#. openerp-web
+#: code:addons/total_notify/static/src/js/genial_selection.js:301
+#, python-format
+msgid "No value found for the field  for value "
+msgstr "Не найдено значение по полю"
+
+#. module: total_notify
+#: field:fields.line,total_notify_id:0
+msgid "Notification"
+msgstr "Оповещение"
+
+#. module: total_notify
+#: model:ir.actions.act_window,name:total_notify.total_requisite_action
+#: model:ir.ui.menu,name:total_notify.total_requisite_menu
+msgid "Notification Requisits"
+msgstr "Реквизиты Оповещений"
+
+#. module: total_notify
+#: view:total.notify:total_notify.total_notify_form
+msgid "Notify"
+msgstr "Оповестить"
+
+#. module: total_notify
+#: model:ir.actions.act_window,name:total_notify.total_notify_action
+#: model:ir.model,name:total_notify.model_total_notify
+#: model:ir.ui.menu,name:total_notify.total_notify_menu
+#: field:total.rule,rule_id:0
+msgid "Notify Configuration"
+msgstr "Настройка Оповещений"
+
+#. module: total_notify
+#: model:ir.model,name:total_notify.model_total_rule
+msgid "Notify Rule"
+msgstr "Правило Оповещений"
+
+#. module: total_notify
+#. openerp-web
+#: code:addons/total_notify/static/src/js/genial_selection.js:121
+#, python-format
+msgid "Open: "
+msgstr "Открыть: "
+
+#. module: total_notify
+#: view:total.notify:total_notify.total_notify_form
+msgid "Planned Jobs"
+msgstr "Планируемые Работы"
+
+#. module: total_notify
+#: view:total.notify:total_notify.total_notify_form
+#: field:total.notify,partner_ids_selected:0
+msgid "Recipients"
+msgstr "Получатели"
+
+#. module: total_notify
+#: view:total.notify:total_notify.total_notify_search
+#: view:total.requisite:total_notify.total_requisite_search
+#: selection:total.requisite,field_type:0
+msgid "Reference"
+msgstr "Ссылка"
+
+#. module: total_notify
+#: field:total.notify,cron_id:0
+msgid "Related Job"
+msgstr "Планируемые Работы"
+
+#. module: total_notify
+#. openerp-web
+#: code:addons/total_notify/static/src/js/genial_selection.js:301
+#, python-format
+msgid "Render"
+msgstr "Воссоздать"
+
+#. module: total_notify
+#: code:addons/total_notify/models/total_notify.py:207
+#, python-format
+msgid "Results"
+msgstr "Результаты"
+
+#. module: total_notify
+#: view:total.notify:total_notify.total_notify_form
+#: field:total.notify,rules_ids:0
+msgid "Rules"
+msgstr "Правила"
+
+#. module: total_notify
+#: code:addons/total_notify/models/total_notify.py:257
+#, python-format
+msgid ""
+"Rules (requisits) must relate to the same model as the notification itself"
+msgstr ""
+"Правила (реквизиты) должны относиться к той же модели, что и само оповещение"
+
+#. module: total_notify
+#: model:ir.model,name:total_notify.model_total_requisite
+#: field:total.rule,requisite_id:0
+msgid "Search Criteria"
+msgstr "Критерии Поиска"
+
+#. module: total_notify
+#. openerp-web
+#: code:addons/total_notify/static/src/js/genial_selection.js:51
+#, python-format
+msgid "Search more ..."
+msgstr "Искать еще ..."
+
+#. module: total_notify
+#. openerp-web
+#: code:addons/total_notify/static/src/js/genial_selection.js:374
+#, python-format
+msgid "Search: "
+msgstr "Искать: "
+
+#. module: total_notify
+#: selection:total.requisite,field_type:0
+msgid "Selection"
+msgstr "Выбор из списка"
+
+#. module: total_notify
+#: selection:total.rule,send_result_flag_sel:0
+msgid "Send"
+msgstr "Отправить"
+
+#. module: total_notify
+#: help:total.notify,send_by_xls:0
+msgid "Send Excel file with result"
+msgstr "Отправить оповещение как Excel файл"
+
+#. module: total_notify
+#: field:total.notify,send_by_xls:0
+msgid "Send as attachments"
+msgstr "Отправить как вложение"
+
+#. module: total_notify
+#: field:fields.line,sequence:0
+msgid "Sequence"
+msgstr "Последовательность"
+
+#. module: total_notify
+#: view:total.notify:total_notify.total_notify_form
+msgid "Settings"
+msgstr "Настройки"
+
+#. module: total_notify
+#: view:total.notify:total_notify.total_notify_form
+msgid "Show"
+msgstr "Показать"
+
+#. module: total_notify
+#: field:total.notify,message_summary:0
+msgid "Summary"
+msgstr "Сводка"
+
+#. module: total_notify
+#: selection:total.requisite,field_type:0
+msgid "Text"
+msgstr "Текст"
+
+#. module: total_notify
+#: field:total.notify,message_unread:0
+msgid "Unread Messages"
+msgstr "Непрочитанные сообщения"
+
+#. module: total_notify
+#: field:total.rule,char_value:0 field:total.rule,float_value:0
+#: field:total.rule,int_value:0 field:total.rule,link_field:0
+#: field:total.rule,value:0
+msgid "Value"
+msgstr "Значение"
+
+#. module: total_notify
+#: view:total.notify:total_notify.total_notify_form
+msgid "Ограничение"
+msgstr "Ограничение"

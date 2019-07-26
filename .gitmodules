@@ -1,0 +1,32 @@
+[submodule "bank-payment"]
+	path = bank-payment
+	url = https://github.com/oca/bank-payment.git
+	branch = 11.0
+[submodule "community-data-files"]
+	path = community-data-files
+	url = https://github.com/oca/community-data-files.git
+	branch = 11.0
+[submodule "knowledge"]
+	path = knowledge
+	url = https://github.com/oca/knowledge.git
+	branch = 11.0
+[submodule "l10n-spain"]
+	path = l10n-spain
+	url = https://github.com/oca/l10n-spain.git
+	branch = 11.0
+[submodule "partner-contact"]
+	path = partner-contact
+	url = https://github.com/oca/partner-contact.git
+	branch = 11.0
+[submodule "project-service"]
+	path = project-service
+	url = https://github.com/oca/project-service.git
+	branch = 11.0
+[submodule "server-ux"]
+	path = server-ux
+	url = https://github.com/oca/server-ux.git
+	branch = 11.0
+[submodule "web"]
+	path = web
+	url = https://github.com/oca/web.git
+	branch = 11.0

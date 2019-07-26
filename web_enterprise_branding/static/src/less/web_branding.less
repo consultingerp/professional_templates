@@ -1,0 +1,14 @@
+div.o_application_switcher {
+  // Custom background image
+    // Fallback for browsers that doesn't support css gradients
+  background-image: url(/enterprise/web_enterprise/static/src/img/kon.jpg);
+  background-position: center;
+  .o-background-size(cover);
+
+  // Prefer css gradient over images
+  .o-skew-gradient(rgba(68, 146, 198, 1), rgba(61, 131, 178, 1));
+}
+// Para poner las letras en negro, no queda bien: 
+// div.o_caption {
+//   color: black !important;
+// }
